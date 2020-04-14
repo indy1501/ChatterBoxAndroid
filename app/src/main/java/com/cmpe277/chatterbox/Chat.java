@@ -28,6 +28,7 @@ public class Chat extends AppCompatActivity {
     private ViewPager mViewPager;
 
 //    String user_id = "John";
+    //    String user_id = "Lisbon";
 
     //private FirebaseAuth mAuth;
 
