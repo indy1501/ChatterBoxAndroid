@@ -1,0 +1,34 @@
+<resources>
+    <string name="app_name">ChatterBox</string>
+    <string name="signUp">SIGNUP</string>
+    <string name="login">LOGIN</string>
+    <string name="chatterBox">ChatterBox</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="register">Register</string>
+    <string name="chatterbox">ChatterBox</string>
+    <string name="new_to_chatterbox_register_here">New to ChatterBox? Register here</string>
+    <string name="logout">Log Out</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="all_users">All Users</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="chat_page">Chat Page</string>
+    <string name="friends_page">Friends Page</string>
+    <string name="status_page">Status page</string>
+    <string name="chat_heading">Chat</string>
+    <string name="status_heading">Status</string>
+    <string name="friends_heading">Friends</string>
+    <string name="change_status">Change Status</string>
+    <string name="change_picture">Change Picture</string>
+    <string name="status_msg">Hello there! I am using ChatterBox!</string>
+    <string name="display_name">Display Name</string>
+    <string name="user_status">Hello there! I am using Chatterbox!</string>
+    <string name="status_update">Update</string>
+    <string name="profile_name">Name</string>
+    <string name="profile_status">Current Status</string>
+    <string name="profile_picture">Profile Picture</string>
+    <string name="profile">Profile</string>
+    <string name="all_users_btn">All Users</string>
+</resources>

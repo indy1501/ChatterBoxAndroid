@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".Settings">
+
+
+    <include
+        android:id="@+id/settings_bar"
+        layout="@layout/app_bar" />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="338dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="70dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="323dp"
+        android:foregroundGravity="center"
+        android:src="@drawable/profile" />
+
+    <Button
+        android:id="@+id/change_image_btn"
+        style="@android:style/Widget.Holo.Button"
+        android:layout_width="258dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="117dp"
+        android:layout_marginEnd="98dp"
+        android:layout_marginBottom="47dp"
+        android:fontFamily="@font/aref_ruqaa"
+        android:text="@string/change_picture"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/change_status_btn"
+        style="@android:style/Widget.Holo.Button"
+        android:layout_width="259dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="122dp"
+        android:layout_marginEnd="92dp"
+        android:layout_marginBottom="122dp"
+        android:fontFamily="@font/aref_ruqaa"
+        android:text="@string/change_status"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/status_msg"
+        android:layout_width="406dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="188dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:backgroundTintMode="screen"
+        android:fontFamily="@font/aref_ruqaa"
+        android:freezesText="true"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="@string/user_status"
+        android:textAllCaps="false"
+        android:textColor="@color/colorAccent"
+        android:textSize="20sp"
+        android:textStyle="normal" />
+
+    <TextView
+        android:id="@+id/display_name"
+        android:layout_width="234dp"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/status_msg"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="90dp"
+        android:layout_marginBottom="22dp"
+        android:fontFamily="@font/aref_ruqaa"
+        android:gravity="center"
+        android:text="@string/display_name"
+        android:textColor="@color/colorAccent"
+        android:textSize="28sp" />
+
+
+</RelativeLayout>
+
+

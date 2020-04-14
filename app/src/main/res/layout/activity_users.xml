@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="visible"
+    tools:context=".Users">
+
+    <include
+        android:id="@+id/users_tool_bar"
+        layout="@layout/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="54dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/users_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/users_tool_bar"
+        android:layout_marginTop="0dp" />
+
+
+</RelativeLayout>
