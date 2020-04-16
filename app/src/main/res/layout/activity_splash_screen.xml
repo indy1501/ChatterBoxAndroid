@@ -35,7 +35,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginEnd="84dp"
         android:layout_marginBottom="312dp"
-        tools:srcCompat="@tools:sample/avatars[2]" />
+        tools:srcCompat="@drawable/logo" />
 
     <TextView
         android:id="@+id/welcome"
