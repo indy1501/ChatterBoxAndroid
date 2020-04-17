@@ -3,14 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/holo_orange_light">
+    android:background="@drawable/background_users">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/dp"
         android:layout_width="95dp"
         android:layout_height="105dp"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/profile" />
 
     <EditText
