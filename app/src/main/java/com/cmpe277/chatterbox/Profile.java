@@ -24,6 +24,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Profile extends AppCompatActivity {
@@ -50,11 +52,12 @@ public class Profile extends AppCompatActivity {
 
         mProfileBar = findViewById(R.id.profile_bar);
         setSupportActionBar(mProfileBar);
-        getSupportActionBar().setTitle("Account Profile");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Account Profile");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final String user_id = getIntent().getStringExtra("user_id");
 
+        assert user_id != null;
         mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
         mFriendReqDatabase = FirebaseDatabase.getInstance().getReference().child("Friend_req");
         mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();

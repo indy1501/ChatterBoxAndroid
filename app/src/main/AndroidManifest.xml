@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/logo_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Profile"></activity>
+        <activity
+            android:name=".Profile"
+            android:parentActivityName=".Users" />
         <activity
             android:name=".Users"
             android:parentActivityName=".Chat" />
