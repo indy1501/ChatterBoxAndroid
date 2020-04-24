@@ -36,36 +36,36 @@ public class MainActivity extends AppCompatActivity {
 
         if(currentUser != null){
 
-                Intent chatIntent = new Intent(MainActivity.this, Chat.class);
-                startActivity(chatIntent);
+            Intent chatIntent = new Intent(MainActivity.this, Chat.class);
+            startActivity(chatIntent);
+            finish();
+
+        }
+
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent loginIntent = new Intent(MainActivity.this, Login.class);
+                startActivity(loginIntent);
                 finish();
+            }
+        });
 
-        }
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-            login.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Intent loginIntent = new Intent(MainActivity.this, Login.class);
-                    startActivity(loginIntent);
-                    finish();
-                }
-            });
-
-            register.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-
-                    Intent registerIntent = new Intent(MainActivity.this, Register.class);
-                    startActivity(registerIntent);
-                    finish();
-                }
-            });
-
-        }
-
-
+                Intent registerIntent = new Intent(MainActivity.this, Register.class);
+                startActivity(registerIntent);
+                finish();
+            }
+        });
 
     }
+
+
+
+}
 
 
