@@ -148,8 +148,7 @@ public class Profile extends AppCompatActivity {
 
                     if (mCurrentState.equals("not_friends")) {
                         mFriendRequestBtn.setBackgroundColor(getResources().getColor(R.color.colorAccent));
-                        mFriendRequestBtn.setText(R.string.requestSentMessage);
-                        mFriendRequestBtn.setEnabled(false);
+
                         sendChatRequest();
                     }
                     if (mCurrentState.equals("request_received")) {
@@ -168,5 +167,28 @@ public class Profile extends AppCompatActivity {
     }
 
     private void sendChatRequest() {
+        mFriendReqDatabase.child(senderUserId)
+                .child(receiverUserId)
+                .child("type_of_request")
+                .setValue("sent")
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()){
+                            mFriendReqDatabase.child(receiverUserId).child(senderUserId)
+                                    .child("type_of_request").setValue("received")
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful()){
+                                                mFriendRequestBtn.setText(R.string.requestSentMessage);
+                                                mFriendRequestBtn.setEnabled(false);
+                                                mCurrentState = "request_sent";
+                                            }
+                                        }
+                                    });
+                        }
+                    }
+                });
     }
 }
