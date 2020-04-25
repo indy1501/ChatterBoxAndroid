@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -37,13 +38,12 @@ public class Profile extends AppCompatActivity {
     private Button mFriendRequestBtn;
     private Button mRejectBtn;
     private Toolbar mProfileBar;
-    private String mCurrent_state;
+    private String mCurrentState, receiverUserId, senderUserId;
 
 
-    //private FirebaseDatabase mUsersDatabase;
-    private DatabaseReference mFriendReqDatabase;
-    private DatabaseReference mUsersDatabase;
+    private DatabaseReference mFriendReqDatabase, mUsersDatabase, mFriendsDatabase;
     private FirebaseUser mCurrentUser;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +55,14 @@ public class Profile extends AppCompatActivity {
         Objects.requireNonNull(getSupportActionBar()).setTitle("Account Profile");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        final String user_id = getIntent().getStringExtra("user_id");
+        mAuth = FirebaseAuth.getInstance();
+        mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        mFriendReqDatabase = FirebaseDatabase.getInstance().getReference().child("Friend Requests");
+        mFriendsDatabase = FirebaseDatabase.getInstance().getReference().child("Friends");
 
-        assert user_id != null;
-        mUsersDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(user_id);
-        mFriendReqDatabase = FirebaseDatabase.getInstance().getReference().child("Friend_req");
-        mCurrentUser = FirebaseAuth.getInstance().getCurrentUser();
+        receiverUserId = getIntent().getStringExtra("user_id");
+        mCurrentUser = mAuth.getCurrentUser();
+        senderUserId = mCurrentUser.getUid();
 
         mProfilePic = findViewById(R.id.profile_pic);
         mProfileName = findViewById(R.id.profile_name);
@@ -68,21 +70,68 @@ public class Profile extends AppCompatActivity {
         mTotalFriends = findViewById(R.id.total_friends);
         mFriendRequestBtn = findViewById(R.id.request_btn);
         mRejectBtn = findViewById(R.id.reject_btn);
-        mCurrent_state = "not_friends";
+        mCurrentState = "not_friends";
 
-        mUsersDatabase.addValueEventListener(new ValueEventListener() {
+        retrieveUserData();
+
+
+
+    }
+
+    private void retrieveUserData() {
+        mUsersDatabase.child(receiverUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    String pName = (String) dataSnapshot.child("name").getValue();
+                    String pStatus = (String) dataSnapshot.child("status").getValue();
 
-                String pName = dataSnapshot.child("name").getValue().toString();
-                String pStatus = dataSnapshot.child("status").getValue().toString();
-                //String pImage = dataSnapshot.child("image").getValue().toString();
+                    mProfileName.setText(pName);
+                    mProfileStatus.setText(pStatus);
 
-                mProfileName.setText(pName);
-                mProfileStatus.setText(pStatus);
+                    processRequest();
+                }else{
+                    String pName = (String) dataSnapshot.child("name").getValue();
+                    String pStatus = (String) dataSnapshot.child("status").getValue();
+                    //String pImage = dataSnapshot.child("image").getValue().toString();
+
+                    mProfileName.setText(pName);
+                    mProfileStatus.setText(pStatus);
+
+                    processRequest();
+                }
 
                 //Picasso.get().load(pImage).placeholder(R.drawable.profile).into(mProfilePic);
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void processRequest() {
+        mFriendReqDatabase.child(senderUserId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild(receiverUserId)){
+                    String type_of_request = dataSnapshot.child(receiverUserId).child("type_of_request").getValue().toString();
+
+                    if(type_of_request.equals("sent")){
+                        mCurrentState = "request_sent";
+                        mFriendRequestBtn.setText("Send Request");
+                        mRejectBtn.setVisibility(View.INVISIBLE);
+//                        mRejectBtn.setEnabled(false);
+
+                    }
+                    else if(type_of_request.equals("received")){
+                        mCurrentState = "request_received";
+                        mFriendRequestBtn.setText("Accept Request");
+                        mRejectBtn.setText(R.string.rejectRequest);
+
+                    }
+                }
             }
 
             @Override
@@ -91,47 +140,33 @@ public class Profile extends AppCompatActivity {
             }
         });
 
+        if (!senderUserId.equals(receiverUserId)) {
+            mFriendRequestBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mFriendRequestBtn.setEnabled(false);
 
-        mFriendRequestBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if(mCurrent_state.equals("not_friends")){
-
-                    mFriendReqDatabase.child(mCurrentUser.getUid()).child(user_id).child("request_type").setValue("sent")
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-
-                                    if(task.isSuccessful()){
-
-                                        mFriendReqDatabase.child(user_id).child(mCurrentUser.getUid()).child("request_type")
-                                                .setValue("received")
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void aVoid) {
-                                                        Toast.makeText(Profile.this, "friend request sent successfully", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                });
-
-                                    } else {
-                                        Toast.makeText(Profile.this, "friend request was not sent", Toast.LENGTH_SHORT).show();
-                                    }
-
-                                }
-                            });
+                    if (mCurrentState.equals("not_friends")) {
+                        mFriendRequestBtn.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                        mFriendRequestBtn.setText(R.string.requestSentMessage);
+                        mFriendRequestBtn.setEnabled(false);
+                        sendChatRequest();
+                    }
+                    if (mCurrentState.equals("request_received")) {
+                        acceptChatRequest();
+                    }
                 }
+            });
 
-            }
-        });
+        } else {
+            mFriendRequestBtn.setVisibility(View.INVISIBLE);
+            mRejectBtn.setVisibility(View.INVISIBLE);
+        }
+    }
 
-        mRejectBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    private void acceptChatRequest() {
+    }
 
-            }
-        });
-
-
+    private void sendChatRequest() {
     }
 }

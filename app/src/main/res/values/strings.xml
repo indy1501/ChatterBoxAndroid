@@ -32,4 +32,8 @@
     <string name="profile">Profile</string>
     <string name="all_users_btn">All Users</string>
     <string name="current_status">Current Status</string>
+    <string name="acceptRequest">Accept Friend Request</string>
+    <string name="rejectRequest">Cancel Request</string>
+    <string name="sendRequest">Send Friend Request</string>
+    <string name="requestSentMessage">Request Sent!</string>
 </resources>

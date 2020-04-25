@@ -67,16 +67,17 @@
     <Button
         android:id="@+id/request_btn"
         style="@android:style/Widget.Holo.Button"
-        android:layout_width="wrap_content"
+        android:layout_width="229dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginEnd="91dp"
-        android:layout_marginBottom="80dp"
+        android:layout_marginEnd="90dp"
+        android:layout_marginBottom="77dp"
         android:gravity="center"
-        android:text="Send Friend Request"
+        android:text="@string/sendRequest"
         android:textAllCaps="true"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/reject_btn"
@@ -90,7 +91,8 @@
         android:layout_marginEnd="102dp"
         android:layout_marginBottom="21dp"
         android:gravity="center"
-        android:text="Reject Request"
+        android:text="@string/rejectRequest"
         android:textAllCaps="true"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:visibility="invisible" />
 </RelativeLayout>
