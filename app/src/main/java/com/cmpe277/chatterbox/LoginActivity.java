@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,11 +15,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-import org.w3c.dom.Text;
-
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     EditText emailId, password;
     Button login;
@@ -46,12 +42,12 @@ public class Login extends AppCompatActivity {
                 if(!TextUtils.isEmpty(email) || !TextUtils.isEmpty(pswd)){
 
                     mAuth.signInWithEmailAndPassword(email, pswd)
-                            .addOnCompleteListener(Login.this, new OnCompleteListener<AuthResult>() {
+                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(Login.this, "Login successful", Toast.LENGTH_SHORT).show();
-                                        Intent chatIntent = new Intent(Login.this, Chat.class);
+                                        Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+                                        Intent chatIntent = new Intent(LoginActivity.this, ChatActivity.class);
                                         chatIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(chatIntent);
                                         finish();
@@ -59,7 +55,7 @@ public class Login extends AppCompatActivity {
 
                                     } else {
 
-                                        Toast.makeText(Login.this, "Authentication failed." + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, "Authentication failed." + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
                                     }
                                 }

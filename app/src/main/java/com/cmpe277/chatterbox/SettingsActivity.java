@@ -6,14 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
-import android.graphics.Picture;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,11 +30,9 @@ import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
-import java.util.UUID;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Settings extends AppCompatActivity {
+public class SettingsActivity extends AppCompatActivity {
 
     private FirebaseUser mCurrentUser;
     private FirebaseDatabase mDatabase;
@@ -103,7 +97,7 @@ public class Settings extends AppCompatActivity {
             public void onClick(View v) {
 
                 String status_value = mStatus.getText().toString();
-                Intent changeStatus = new Intent(Settings.this, Status.class);
+                Intent changeStatus = new Intent(SettingsActivity.this, StatusActivity.class);
                 changeStatus.putExtra("status_value", status_value);
                 startActivity(changeStatus);
 
@@ -122,7 +116,7 @@ public class Settings extends AppCompatActivity {
 //                 start picker to get image for cropping and then use the image in cropping activity
                 CropImage.activity()
                         .setGuidelines(CropImageView.Guidelines.ON)
-                        .start(Settings.this);
+                        .start(SettingsActivity.this);
 
             }
         });
@@ -167,7 +161,7 @@ public class Settings extends AppCompatActivity {
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if(task.isSuccessful()){
 
-                                                        Toast.makeText(Settings.this, "Upload successful", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(SettingsActivity.this, "Upload successful", Toast.LENGTH_SHORT).show();
                                                     }
                                                 }
                                             });

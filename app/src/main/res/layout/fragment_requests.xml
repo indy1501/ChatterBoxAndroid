@@ -3,13 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context=".FriendsFragment">
-
+    tools:context=".RequestsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/friend_list"
+        android:id="@+id/friend_requests_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true" />
 </FrameLayout>

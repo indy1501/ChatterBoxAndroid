@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         if(currentUser != null){
 
-            Intent chatIntent = new Intent(MainActivity.this, Chat.class);
+            Intent chatIntent = new Intent(MainActivity.this, ChatActivity.class);
             startActivity(chatIntent);
             finish();
 
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent loginIntent = new Intent(MainActivity.this, Login.class);
+                Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(loginIntent);
                 finish();
             }
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent registerIntent = new Intent(MainActivity.this, Register.class);
+                Intent registerIntent = new Intent(MainActivity.this, RegisterActivity.class);
                 startActivity(registerIntent);
                 finish();
             }

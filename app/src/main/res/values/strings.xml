@@ -33,7 +33,14 @@
     <string name="all_users_btn">All Users</string>
     <string name="current_status">Current Status</string>
     <string name="acceptRequest">Accept Friend Request</string>
+    <string name="acceptBtn">Accept</string>
     <string name="rejectRequest">Cancel Request</string>
     <string name="sendRequest">Send Friend Request</string>
     <string name="requestSentMessage">Request Sent!</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user_name">User Name</string>
+    <string name="requestComment">would like to chat with you.</string>
+    <string name="requests">Requests</string>
 </resources>

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
-public class Register extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
 
     private EditText username, emailId, password;
     private Button register;
@@ -75,7 +74,7 @@ public class Register extends AppCompatActivity {
                     register_user(displayName, email, pswd);
 
                 } else {
-                    Toast.makeText(Register.this, "Error occurred", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegisterActivity.this, "Error occurred", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -85,7 +84,7 @@ public class Register extends AppCompatActivity {
     private void register_user(final String displayName, String email, String pswd) {
 
         mAuth.createUserWithEmailAndPassword(email, pswd)
-                            .addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
+                            .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
@@ -103,15 +102,15 @@ public class Register extends AppCompatActivity {
                                         myRef.setValue(userMap);
 
 
-                                        Toast.makeText(Register.this, "Sign up successful", Toast.LENGTH_SHORT).show();
-                                        Intent chatPageIntent = new Intent(Register.this, Chat.class);
+                                        Toast.makeText(RegisterActivity.this, "Sign up successful", Toast.LENGTH_SHORT).show();
+                                        Intent chatPageIntent = new Intent(RegisterActivity.this, ChatActivity.class);
                                         chatPageIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(chatPageIntent);
                                         finish();
 
                                     } else {
 
-                                        Toast.makeText(Register.this, "Authentication failed. Please check the credentials and try again" + task.getException().getMessage(),
+                                        Toast.makeText(RegisterActivity.this, "Authentication failed. Please check the credentials and try again" + task.getException().getMessage(),
                                                 Toast.LENGTH_SHORT).show();
 
                                     }

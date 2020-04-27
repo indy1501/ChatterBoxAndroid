@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-    tools:context=".Profile">
+    tools:context=".ProfileActivity">
 
     <include
         android:id="@+id/profile_bar"
@@ -66,7 +66,7 @@
 
     <Button
         android:id="@+id/request_btn"
-        style="@android:style/Widget.Holo.Button"
+        style="@style/contrast_button"
         android:layout_width="229dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -76,12 +76,11 @@
         android:gravity="center"
         android:text="@string/sendRequest"
         android:textAllCaps="true"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textSize="18sp" />
 
     <Button
-        android:id="@+id/reject_btn"
-        style="@android:style/Widget.Holo.Button"
+        android:id="@+id/cancel_req_btn"
+        style="@style/contrast_button"
         android:layout_width="194dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -94,5 +93,6 @@
         android:text="@string/rejectRequest"
         android:textAllCaps="true"
         android:textSize="18sp"
+        android:textStyle="bold"
         android:visibility="invisible" />
 </RelativeLayout>

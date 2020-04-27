@@ -2,9 +2,9 @@ package com.cmpe277.chatterbox;
 
 public class UsersList {
 
-    public String name;
-    public String image;
-    public String status;
+    private String name;
+    private String image;
+    private String status;
 
     public UsersList(){}
 

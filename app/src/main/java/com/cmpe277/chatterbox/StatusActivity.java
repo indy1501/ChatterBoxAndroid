@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class Status extends AppCompatActivity {
+public class StatusActivity extends AppCompatActivity {
 
     private EditText mStatus;
     private Button mUpdateBtn;

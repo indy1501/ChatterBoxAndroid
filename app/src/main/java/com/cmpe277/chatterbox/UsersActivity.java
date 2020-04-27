@@ -11,8 +11,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -20,13 +18,11 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.w3c.dom.Text;
-
 import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Users extends AppCompatActivity {
+public class UsersActivity extends AppCompatActivity {
 
     private Toolbar mUsersBar;
     private RecyclerView mUsersList;
@@ -80,7 +76,7 @@ public class Users extends AppCompatActivity {
                             public void onClick(View v) {
                                 String user_id = getRef(position).getKey();
 
-                                Intent profileIntent = new Intent(Users.this, Profile.class);
+                                Intent profileIntent = new Intent(UsersActivity.this, ProfileActivity.class);
                                 profileIntent.putExtra("user_id", user_id);
                                 startActivity(profileIntent);
                             }

@@ -5,19 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.viewpager.widget.ViewPager;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class Chat extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity {
 
 
     private Toolbar mToolbar;
@@ -25,6 +22,7 @@ public class Chat extends AppCompatActivity {
     private TabItem mTabStatus;
     private TabItem mTabChat;
     private TabItem mTabFriends;
+    private TabItem mTabRequests;
     private ViewPager mViewPager;
 
 //    String user_id = "John";
@@ -46,7 +44,9 @@ public class Chat extends AppCompatActivity {
         mTabStatus = findViewById(R.id.tabStatus);
         mTabChat = findViewById(R.id.tabChat);
         mTabFriends = findViewById(R.id.tabFriends);
+        mTabRequests = findViewById(R.id.tabRequests);
         mViewPager = findViewById(R.id.viewPager);
+
 
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), mTabLayout.getTabCount());
 
@@ -84,19 +84,19 @@ public class Chat extends AppCompatActivity {
         if(item.getItemId() == R.id.logout_btn){
 
             FirebaseAuth.getInstance().signOut();
-            Intent logoutIntent = new Intent(Chat.this, MainActivity.class);
+            Intent logoutIntent = new Intent(ChatActivity.this, MainActivity.class);
             startActivity(logoutIntent);
         }
 
         if(item.getItemId() == R.id.settings_btn){
 
-            Intent settingsIntent = new Intent(Chat.this, Settings.class);
+            Intent settingsIntent = new Intent(ChatActivity.this, SettingsActivity.class);
             startActivity(settingsIntent);
         }
 
         if(item.getItemId() == R.id.all_users_btn){
 
-            Intent allUsersIntent = new Intent(Chat.this, Users.class);
+            Intent allUsersIntent = new Intent(ChatActivity.this, UsersActivity.class);
             startActivity(allUsersIntent);
         }
 

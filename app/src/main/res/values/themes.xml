@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ButtonTheme" parent="android:style/Theme.NoTitleBar">
+        <item name="android:buttonStyle">@style/button</item>
+    </style>
+    <style name="ContrasButtonTheme" parent="android:style/Theme.NoTitleBar">
+        <item name="android:buttonStyle">@style/contrast_button</item>
+    </style>
+
+</resources>
