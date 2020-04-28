@@ -43,4 +43,6 @@
     <string name="user_name">User Name</string>
     <string name="requestComment">would like to chat with you.</string>
     <string name="requests">Requests</string>
+    <string name="reqSent">Request Sent</string>
+    <string name="sentReqComment">You have already sent a request to %s</string>
 </resources>

@@ -106,7 +106,6 @@ public class RequestsFragment extends Fragment {
 //                                        }
 
                                         final String requestUserName = dataSnapshot.child("name").getValue().toString();
-                                        final String requestUserStatus = dataSnapshot.child("status").getValue().toString();
 
                                         holder.name.setText(requestUserName);
                                         holder.status.setText(R.string.requestComment);
@@ -170,6 +169,31 @@ public class RequestsFragment extends Fragment {
                                         });
 
 
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+                            }
+                            else if(requestType.equals("sent")){
+                                Button requestSentBtn = holder.itemView.findViewById(R.id.reject_btn);
+                                requestSentBtn.setText(R.string.reqSent);
+                                holder.itemView.findViewById(R.id.accept_btn).setVisibility(View.INVISIBLE);
+
+                                mUsersDatabase.child(listUserId).addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                                        if(dataSnapshot.hasChild("image")){
+//                                            String requestProfileImage = dataSnapshot.child("image").getValue().toString();
+//                                           // Picasso.get().load(requestProfileImage).into(holder.pImage);
+//                                        }
+
+                                        final String requestUserName = dataSnapshot.child("name").getValue().toString();
+
+                                        holder.name.setText(requestUserName);
+                                        holder.status.setText(getString(R.string.sentReqComment,requestUserName));
                                     }
 
                                     @Override
