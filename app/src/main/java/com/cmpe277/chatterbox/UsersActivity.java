@@ -17,6 +17,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
@@ -26,7 +27,6 @@ public class UsersActivity extends AppCompatActivity {
 
     private Toolbar mUsersBar;
     private RecyclerView mUsersList;
-//    private UsersAdapter adapter;
     private DatabaseReference usersRef;
 
     @Override
@@ -43,17 +43,6 @@ public class UsersActivity extends AppCompatActivity {
         setSupportActionBar(mUsersBar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(getSupportActionBar()).setTitle("All Users");
-
-
-
-
-//        mUsersList.setHasFixedSize(true);
-
-
-
-//        adapter = new UsersAdapter(options);
-//        mUsersList.setAdapter(adapter);
-
     }
 
     @Override
@@ -69,7 +58,6 @@ public class UsersActivity extends AppCompatActivity {
                     protected void onBindViewHolder(@NonNull UsersListViewHolder holder, final int position, @NonNull UsersList model) {
                         holder.userName.setText(model.getName());
                         holder.userStatus.setText(model.getStatus());
-                        //holder.setImage(model.getImage());
 
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -101,15 +89,10 @@ public class UsersActivity extends AppCompatActivity {
             super(itemView);
             userName = itemView.findViewById(R.id.name);
             userStatus = itemView.findViewById(R.id.status);
-            //profileImage = itemView.findViewById(R.id.dp);
+            profileImage = itemView.findViewById(R.id.dp);
         }
     }
 
-//    @Override
-//    protected void onStop() {
-//        super.onStop();
-//        adapter.stopListening();
-//    }
 
 }
 

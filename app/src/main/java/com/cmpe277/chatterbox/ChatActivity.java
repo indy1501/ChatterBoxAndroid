@@ -25,10 +25,6 @@ public class ChatActivity extends AppCompatActivity {
     private TabItem mTabRequests;
     private ViewPager mViewPager;
 
-//    String user_id = "John";
-    //    String user_id = "Lisbon";
-
-    //private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +34,6 @@ public class ChatActivity extends AppCompatActivity {
         mToolbar =  findViewById(R.id.chat_tool_bar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("ChatterBox");
-       // mAuth = FirebaseAuth.getInstance();
 
         mTabLayout = findViewById(R.id.tabBar);
         mTabStatus = findViewById(R.id.tabStatus);

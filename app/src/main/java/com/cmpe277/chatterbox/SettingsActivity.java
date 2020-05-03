@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.internal.Storage;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -43,7 +44,8 @@ public class SettingsActivity extends AppCompatActivity {
     private Button changeStatusBtn;
     private Toolbar mSettingsBar;
     private StorageReference mPictureStorage;
-    private  DatabaseReference myRef;
+    private DatabaseReference myRef;
+    private StorageReference filepath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,12 +79,17 @@ public class SettingsActivity extends AppCompatActivity {
                 String name = dataSnapshot.child("name").getValue().toString();
                 String status = dataSnapshot.child("status").getValue().toString();
                 String image = dataSnapshot.child("image").getValue().toString();
-                String thumbnail = dataSnapshot.child("thumbnail").getValue().toString();
+               // String thumbnail = dataSnapshot.child("thumbnail").getValue().toString();
 
                 mDisplayName.setText(name);
                 mStatus.setText(status);
 
-                Picasso.get().load(image).into(mProfilePic);
+                if(!image.equals("default")){
+
+                    Picasso.get().load(image).placeholder(R.drawable.profile).into(mProfilePic);
+
+                }
+
 
             }
 
@@ -109,15 +116,9 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                Intent picIntent = new Intent(Intent.ACTION_GET_CONTENT);
-//                picIntent.setType("image/*");
-//                startActivityForResult(Intent.createChooser(picIntent, "PROFILE PICTURE"), 1 );
-
-//                 start picker to get image for cropping and then use the image in cropping activity
                 CropImage.activity()
                         .setGuidelines(CropImageView.Guidelines.ON)
                         .start(SettingsActivity.this);
-
             }
         });
 
@@ -146,36 +147,28 @@ public class SettingsActivity extends AppCompatActivity {
 
                     Uri resultUri = result.getUri();
 
-                    StorageReference filepath = mPictureStorage.child("profile_pictures").child(current_uid + ".jpg");
-
-                    filepath.putFile(resultUri)
-                            .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    filepath = mPictureStorage.child("profile_images/"+ current_uid +".jpg");
+                    filepath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            filepath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-
-                                    String downloadUrl = taskSnapshot.getStorage().getDownloadUrl().toString();
-
-                                    myRef.child("image").setValue(downloadUrl)
-                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    if(task.isSuccessful()){
-
-                                                        Toast.makeText(SettingsActivity.this, "Upload successful", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                }
-                                            });
+                                public void onSuccess(Uri uri) {
+                                    String downloadUrl = uri.toString();
+                                    myRef.child("image").setValue(downloadUrl);
                                 }
                             });
 
+                            Toast.makeText(SettingsActivity.this,"Changing Display Picture!",Toast.LENGTH_SHORT).show();
+                        }
+                    });
 
                 } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
 
                     Exception error = result.getError();
+                    Toast.makeText(SettingsActivity.this, (CharSequence) error, Toast.LENGTH_SHORT).show();
                 }
             }
-
-
 
         }
 }
