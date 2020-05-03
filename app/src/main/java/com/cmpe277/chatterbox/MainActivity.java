@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     Button login;
     TextView register;
     private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         login = findViewById(R.id.login_btn);
         register = findViewById(R.id.registerText);
         mAuth = FirebaseAuth.getInstance();
+        currentUser = mAuth.getCurrentUser();
 
     }
 
@@ -32,11 +34,10 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if(currentUser != null){
 
-            Intent chatIntent = new Intent(MainActivity.this, ChatActivity.class);
+            Intent chatIntent = new Intent(MainActivity.this, PostLoginActivity.class);
             startActivity(chatIntent);
             finish();
 

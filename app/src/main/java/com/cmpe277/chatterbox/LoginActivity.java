@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(LoginActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
-                                        Intent chatIntent = new Intent(LoginActivity.this, ChatActivity.class);
+                                        Intent chatIntent = new Intent(LoginActivity.this, PostLoginActivity.class);
                                         chatIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(chatIntent);
                                         finish();

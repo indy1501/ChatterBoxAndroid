@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatsFragment">
+    tools:context="com.cmpe277.chatterbox.ChatsFragment">
 
-    <TextView
+    <!-- TODO: Update blank fragment layout -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/chats_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background"
-        android:gravity="center"
-        android:text="@string/chat_page"
-        android:textColor="@color/colorAccent"
-        android:textSize="24sp" />
-</FrameLayout>
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</RelativeLayout>
