@@ -65,7 +65,7 @@ public class UsersActivity extends AppCompatActivity {
                                 String user_id = getRef(position).getKey();
 
                                 Intent profileIntent = new Intent(UsersActivity.this, ProfileActivity.class);
-                                profileIntent.putExtra("user_id", user_id);
+                                profileIntent.putExtra("visit_user_id", user_id);
                                 startActivity(profileIntent);
                             }
                         });

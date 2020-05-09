@@ -53,7 +53,7 @@ public class ProfileActivity extends AppCompatActivity {
         mFriendReqDatabase = FirebaseDatabase.getInstance().getReference().child("Friend Requests");
         mFriendsDatabase = FirebaseDatabase.getInstance().getReference().child("Friends");
 
-        receiverUserId = getIntent().getStringExtra("user_id");
+        receiverUserId = getIntent().getStringExtra("visit_user_id");
         mCurrentUser = mAuth.getCurrentUser();
         senderUserId = mCurrentUser.getUid();
 

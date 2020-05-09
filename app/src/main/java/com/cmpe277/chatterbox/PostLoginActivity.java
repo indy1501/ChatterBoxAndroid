@@ -112,6 +112,12 @@ public class PostLoginActivity extends AppCompatActivity {
             startActivity(allUsersIntent);
         }
 
+        if (item.getItemId() == R.id.profile_btn){
+            Intent profileIntent = new Intent(PostLoginActivity.this, ProfileActivity.class);
+            profileIntent.putExtra("visit_user_id", mAuth.getCurrentUser().getUid());
+            startActivity(profileIntent);
+        }
+
         return true;
     }
 
