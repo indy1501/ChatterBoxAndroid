@@ -103,7 +103,7 @@ public class RegisterActivity extends AppCompatActivity {
 
 
                                         Toast.makeText(RegisterActivity.this, "Sign up successful", Toast.LENGTH_SHORT).show();
-                                        Intent chatPageIntent = new Intent(RegisterActivity.this, ChatActivity.class);
+                                        Intent chatPageIntent = new Intent(RegisterActivity.this, PostLoginActivity.class);
                                         chatPageIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(chatPageIntent);
                                         finish();

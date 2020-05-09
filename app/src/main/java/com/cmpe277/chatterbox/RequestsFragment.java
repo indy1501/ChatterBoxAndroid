@@ -118,22 +118,31 @@ public class RequestsFragment extends Fragment {
                                                         .setValue("Saved").addOnCompleteListener(new OnCompleteListener<Void>() {
                                                     @Override
                                                     public void onComplete(@NonNull Task<Void> task) {
-                                                        if(task.isSuccessful()){
-                                                            mFriendReqDatabase.child(mCurrentUserId)
-                                                                    .child(listUserId).removeValue()
-                                                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                        if (task.isSuccessful()) {
+                                                            mFriendsDatabase.child(listUserId)
+                                                                    .child(mCurrentUserId).child("Friends")
+                                                                    .setValue("Saved").addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                 @Override
                                                                 public void onComplete(@NonNull Task<Void> task) {
-                                                                    mFriendReqDatabase.child(listUserId)
-                                                                            .child(mCurrentUserId).removeValue()
-                                                                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                @Override
-                                                                                public void onComplete(@NonNull Task<Void> task) {
-                                                                                    if(task.isSuccessful()){
-                                                                                        Toast.makeText(getContext(), "New Friend Saved", Toast.LENGTH_SHORT).show();
+                                                                    if (task.isSuccessful()) {
+                                                                        mFriendReqDatabase.child(mCurrentUserId)
+                                                                                .child(listUserId).removeValue()
+                                                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                    @Override
+                                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                                        mFriendReqDatabase.child(listUserId)
+                                                                                                .child(mCurrentUserId).removeValue()
+                                                                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                    @Override
+                                                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                                                        if (task.isSuccessful()) {
+                                                                                                            Toast.makeText(getContext(), "New Friend Saved", Toast.LENGTH_SHORT).show();
+                                                                                                        }
+                                                                                                    }
+                                                                                                });
                                                                                     }
-                                                                                }
-                                                                            });
+                                                                                });
+                                                                    }
                                                                 }
                                                             });
                                                         }
