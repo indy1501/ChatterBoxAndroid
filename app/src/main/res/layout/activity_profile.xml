@@ -37,6 +37,7 @@
         android:fontFamily="@font/aref_ruqaa"
         android:gravity="center"
         android:text="@string/profile_name"
+        android:layout_below="@+id/profile_pic"
         android:textColor="@color/colorAccent"
         android:textSize="24sp" />
 

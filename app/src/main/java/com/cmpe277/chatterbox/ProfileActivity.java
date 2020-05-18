@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
@@ -75,9 +76,11 @@ public class ProfileActivity extends AppCompatActivity {
         mUsersDatabase.child(receiverUserId).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
+                if(dataSnapshot.exists() && (dataSnapshot.hasChild("image"))){
+                    String userImage = dataSnapshot.child("image").getValue().toString();
                     String pName = (String) dataSnapshot.child("name").getValue();
                     String pStatus = (String) dataSnapshot.child("status").getValue();
+                    Picasso.get().load(userImage).placeholder(R.drawable.profile_image).into(mProfilePic);
 
                     mProfileName.setText(pName);
                     mProfileStatus.setText(pStatus);
@@ -86,8 +89,6 @@ public class ProfileActivity extends AppCompatActivity {
                 }else{
                     String pName = (String) dataSnapshot.child("name").getValue();
                     String pStatus = (String) dataSnapshot.child("status").getValue();
-                    //String pImage = dataSnapshot.child("image").getValue().toString();
-
                     mProfileName.setText(pName);
                     mProfileStatus.setText(pStatus);
 
