@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -100,10 +101,10 @@ public class RequestsFragment extends Fragment {
                                 mUsersDatabase.child(listUserId).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                                        if(dataSnapshot.hasChild("image")){
-//                                            String requestProfileImage = dataSnapshot.child("image").getValue().toString();
-//                                           // Picasso.get().load(requestProfileImage).into(holder.pImage);
-//                                        }
+                                        if (dataSnapshot.hasChild("image")) {
+                                            final String requestProfileImage = dataSnapshot.child("image").getValue().toString();
+                                            Picasso.get().load(requestProfileImage).into(holder.profileImage);
+                                        }
 
                                         final String requestUserName = dataSnapshot.child("name").getValue().toString();
 
@@ -194,10 +195,10 @@ public class RequestsFragment extends Fragment {
                                 mUsersDatabase.child(listUserId).addValueEventListener(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                                        if(dataSnapshot.hasChild("image")){
-//                                            String requestProfileImage = dataSnapshot.child("image").getValue().toString();
-//                                           // Picasso.get().load(requestProfileImage).into(holder.pImage);
-//                                        }
+                                        if(dataSnapshot.hasChild("image")){
+                                            String requestProfileImage = dataSnapshot.child("image").getValue().toString();
+                                            Picasso.get().load(requestProfileImage).into(holder.profileImage);
+                                        }
 
                                         final String requestUserName = dataSnapshot.child("name").getValue().toString();
 
@@ -236,7 +237,7 @@ public class RequestsFragment extends Fragment {
 
     private class FriendRequestViewHolder extends RecyclerView.ViewHolder {
         TextView name,status;
-        CircleImageView dp;
+        CircleImageView profileImage;
         Button acceptBtn, cancelBtn;
 
         public FriendRequestViewHolder(@NonNull View itemView) {
@@ -244,7 +245,7 @@ public class RequestsFragment extends Fragment {
 
             name = itemView.findViewById(R.id.name);
             status = itemView.findViewById(R.id.status);
-            dp = itemView.findViewById(R.id.dp);
+            profileImage = itemView.findViewById(R.id.users_profile_image);
             acceptBtn = itemView.findViewById(R.id.accept_btn);
             cancelBtn = itemView.findViewById(R.id.reject_btn);
         }

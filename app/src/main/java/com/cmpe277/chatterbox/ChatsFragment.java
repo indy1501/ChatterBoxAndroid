@@ -82,7 +82,7 @@ public class ChatsFragment extends Fragment {
                                 if (dataSnapshot.exists()) {
                                     if (dataSnapshot.hasChild("image")) {
                                         retImage[0] = dataSnapshot.child("image").getValue().toString();
-                                        Picasso.get().load(retImage[0]).into(holder.dp);
+                                        Picasso.get().load(retImage[0]).into(holder.profileImage);
                                     }
 
                                     final String retName = dataSnapshot.child("name").getValue().toString();
@@ -128,14 +128,14 @@ public class ChatsFragment extends Fragment {
 
     public static class ChatsViewHolder extends RecyclerView.ViewHolder {
         TextView name, status;
-        CircleImageView dp;
+        CircleImageView profileImage;
 
         public ChatsViewHolder(@NonNull View itemView) {
             super(itemView);
 
             name = itemView.findViewById(R.id.name);
             status = itemView.findViewById(R.id.status);
-            dp = itemView.findViewById(R.id.dp);
+            profileImage = itemView.findViewById(R.id.users_profile_image);
         }
     }
 }

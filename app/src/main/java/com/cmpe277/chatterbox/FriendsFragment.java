@@ -90,8 +90,8 @@ public class FriendsFragment extends Fragment {
                         holder.userStatus.setText(status);
 
                         if(dataSnapshot.hasChild("image")){
-                            String dp = dataSnapshot.child("image").getValue().toString();
-                            Picasso.get().load(dp).placeholder(R.drawable.profile).into(holder.dp);
+                            String userImage = dataSnapshot.child("image").getValue().toString();
+                            Picasso.get().load(userImage).placeholder(R.drawable.profile_image).into(holder.profileImage);
                         }
                     }
 
@@ -111,14 +111,14 @@ public class FriendsFragment extends Fragment {
     public static class FriendsViewHolder extends RecyclerView.ViewHolder{
 
         TextView userName, userStatus;
-        CircleImageView dp;
+        CircleImageView profileImage;
 
         public FriendsViewHolder(@NonNull View itemView) {
             super(itemView);
 
             userName = itemView.findViewById(R.id.name);
             userStatus = itemView.findViewById(R.id.status);
-            dp = itemView.findViewById(R.id.dp);
+            profileImage = itemView.findViewById(R.id.users_profile_image);
         }
     }
 }

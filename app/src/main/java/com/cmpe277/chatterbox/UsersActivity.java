@@ -58,6 +58,8 @@ public class UsersActivity extends AppCompatActivity {
                     protected void onBindViewHolder(@NonNull UsersListViewHolder holder, final int position, @NonNull UsersList model) {
                         holder.userName.setText(model.getName());
                         holder.userStatus.setText(model.getStatus());
+                        Picasso.get().load(model.getImage()).placeholder(R.drawable.profile_image).into(holder.profileImage);
+
 
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -89,7 +91,7 @@ public class UsersActivity extends AppCompatActivity {
             super(itemView);
             userName = itemView.findViewById(R.id.name);
             userStatus = itemView.findViewById(R.id.status);
-            profileImage = itemView.findViewById(R.id.dp);
+            profileImage = itemView.findViewById(R.id.users_profile_image);
         }
     }
 
